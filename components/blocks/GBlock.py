@@ -32,13 +32,19 @@ class GBlock(nn.Module):
 
     def __init__(self, in_channels, out_channels, upsampling=True):
         super().__init__()
-        self.us1 = nn.Upsample(scale_factor=2, mode='nearest') if upsampling else nn.Identity()
-        self.us2 = nn.Upsample(scale_factor=2, mode='nearest') if upsampling else nn.Identity()
+        self.us1 = (
+            nn.Upsample(scale_factor=2, mode="nearest") if upsampling else nn.Identity()
+        )
+        self.us2 = (
+            nn.Upsample(scale_factor=2, mode="nearest") if upsampling else nn.Identity()
+        )
         self.relu = nn.ReLU()
         self.bn = nn.BatchNorm2d(in_channels)
-        self.conv1 = nn.Conv2d(in_channels, out_channels, 1, groups=in_channels)
+        self.conv1 = nn.Conv2d(in_channels, out_channels, 1, groups=out_channels)
         self.conv3_1 = nn.Conv2d(in_channels, in_channels, 3, 1, 1, groups=in_channels)
-        self.conv3_2 = nn.Conv2d(in_channels, out_channels, 3, 1, 1, groups=in_channels)
+        self.conv3_2 = nn.Conv2d(
+            in_channels, out_channels, 3, 1, 1, groups=out_channels
+        )
 
     def forward(self, x):
         x1 = self.us1(x)
