@@ -14,8 +14,7 @@ class ConvGRU(nn.Module):
             number of hidden channels
 
     Shape:
-        - Input: (N, C_in, W, H)
-        - Hidden: (N, C_h, W, H)
+        - Input: (N, C_in, W, H), (N, C_h, W, H)
         - Output: (N, C_h, W, H)
 
     Examples:
