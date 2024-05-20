@@ -41,7 +41,7 @@ class GBlock(nn.Module):
         self.relu = nn.ReLU()
         self.bn = nn.BatchNorm2d(in_channels)
         self.conv1 = nn.Conv2d(in_channels, out_channels, 1, groups=out_channels)
-        self.conv3_1 = nn.Conv2d(in_channels, in_channels, 3, 1, 1, groups=in_channels)
+        self.conv3_1 = nn.Conv2d(in_channels, in_channels, 3, 1, 1, groups=out_channels)
         self.conv3_2 = nn.Conv2d(
             in_channels, out_channels, 3, 1, 1, groups=out_channels
         )
