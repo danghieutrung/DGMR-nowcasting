@@ -15,7 +15,7 @@ class ConditioningStack(nn.Module):
 
     Shape:
         - Input: (N, 4, 1, 256, 256)
-        - Output: [(N, 48, 64, 64), [N, 96, 32, 32], [N, 192, 16, 16], [N, 384, 8, 8]]
+        - Output: [(N, 384, 8, 8), (N, 192, 16, 16), (N, 96, 32, 32), (N, 48, 64, 64)]
 
     Example:
     >>> input = torch.zeros((5, 4, 1, 256, 256))
@@ -54,7 +54,7 @@ class ConditioningStack(nn.Module):
         )
 
     def forward(self, x):
-        x = self.s2d(x)  # 5,4,4,128,128
+        x = self.s2d(x)
         _, T, _, _, _ = x.shape
 
         out = [[], [], [], []]
