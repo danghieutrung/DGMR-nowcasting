@@ -17,7 +17,7 @@ class OutputStack(nn.Module):
             if True, return hidden state. Default: `True`
 
     Shape:
-        - Input: [(N, 768, 8, 8), (N, 384, 16, 16), (N, 192, 32, 32), (N, 96, 64, 64)]
+        - Input: [(N, 384, 8, 8), (N, 192, 16, 16), (N, 96, 32, 32), (N, 48, 64, 64)]
         - Output: ((N, 96, 64, 64), [(N, 768, 8, 8), (N, 384, 16, 16), (N, 192, 32, 32), (N, 96, 64, 64)]) or (N, 96, 64, 64) (if `return_hidden`=`False`)
 
     Examples:
@@ -32,14 +32,14 @@ class OutputStack(nn.Module):
         super().__init__()
         self.return_hidden = return_hidden
         self.convGRUs = nn.ModuleList(
-            [ConvGRU(384, 768), ConvGRU(192, 384), ConvGRU(96, 192), ConvGRU(48, 96)]
+            [ConvGRU(768, 384, 384), ConvGRU(384, 192, 192), ConvGRU(192, 96, 96), ConvGRU(96, 48, 48)]
         )
         self.conv1s = nn.ModuleList(
             [
-                spectral_norm(nn.Conv2d(768, 768, 1, groups=768)),
-                spectral_norm(nn.Conv2d(384, 384, 1, groups=384)),
-                spectral_norm(nn.Conv2d(192, 192, 1, groups=192)),
-                spectral_norm(nn.Conv2d(96, 96, 1, groups=96)),
+                spectral_norm(nn.Conv2d(384, 768, 1, groups=384)),
+                spectral_norm(nn.Conv2d(192, 384, 1, groups=192)),
+                spectral_norm(nn.Conv2d(96, 192, 1, groups=96)),
+                spectral_norm(nn.Conv2d(48, 96, 1, groups=48)),
             ]
         )
         self.gblocks = nn.ModuleList(
@@ -63,20 +63,20 @@ class OutputStack(nn.Module):
         self.conv1_5 = spectral_norm(nn.Conv2d(48, 4, 1))
         self.d2s = PixelShuffle(upscale_factor=2)
 
-    def forward(self, prev_state):
-        new_state = []
-        batch_size = prev_state[0].shape[0]
+    def forward(self, h0):
+        h = []
+        batch_size = h0[0].shape[0]
 
         x = LatentConditioningStack(batch_size)()
         for state, convGRU, conv1, G, G_up in zip(
-            prev_state,
+            h0,
             self.convGRUs,
             self.conv1s,
             self.gblocks,
             self.gblocks_up,
         ):
-            x = convGRU(state, x)
-            new_state.append(x)
+            x = convGRU(x, state)
+            h.append(x)
             x = conv1(x)
             x = G(x)
             x = G_up(x)
@@ -88,4 +88,5 @@ class OutputStack(nn.Module):
 
         if not self.return_hidden:
             return x
-        return (x, new_state)
+        return (x, h)
+
