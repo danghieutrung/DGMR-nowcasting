@@ -12,6 +12,8 @@ class ConvGRU(nn.Module):
             number of input channels
         `hidden_channels`: `int`
             number of hidden channels
+        `out_channels`: `int`
+            number of output channels. Default:`out_channels`=`hidden_channels`
 
     Shape:
         - Input: (N, C_in, W, H), (N, C_h, W, H)
