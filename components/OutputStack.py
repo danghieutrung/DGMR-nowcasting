@@ -6,8 +6,6 @@ from LatentConditioningStack import LatentConditioningStack
 
 from blocks.ConvGRU import ConvGRU
 from blocks.GBlock import GBlock
-from blocks.LBlock import LBlock
-from blocks.SpatialAttention import SpatialAttention
 
 
 class OutputStack(nn.Module):
