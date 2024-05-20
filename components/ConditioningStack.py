@@ -27,10 +27,6 @@ class ConditioningStack(nn.Module):
     def __init__(self):
         super().__init__()
         self.s2d = S2D(0.5)
-        self.d1 = DBlock(4, 24)
-        self.d2 = DBlock(24, 48)
-        self.d3 = DBlock(48, 96)
-        self.d4 = DBlock(96, 192)
         self.dblocks = nn.ModuleList(
             [DBlock(4, 24), DBlock(24, 48), DBlock(48, 96), DBlock(96, 192)]
         )
