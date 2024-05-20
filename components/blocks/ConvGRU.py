@@ -26,17 +26,18 @@ class ConvGRU(nn.Module):
     torch.Size([5, 384, 8, 8])
     """
 
-    def __init__(self, in_channels, hidden_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels=None):
         super().__init__()
         input_size = in_channels + hidden_channels
-        output_size = hidden_channels
+        if not out_channels:
+            out_channels = hidden_channels
         self.reset_gate = spectral_norm(
-            nn.Conv2d(input_size, output_size, 3, padding=1)
+            nn.Conv2d(input_size, out_channels, 3, padding=1)
         )
         self.update_gate = spectral_norm(
-            nn.Conv2d(input_size, output_size, 3, padding=1)
+            nn.Conv2d(input_size, out_channels, 3, padding=1)
         )
-        self.out_gate = spectral_norm(nn.Conv2d(input_size, output_size, 3, padding=1))
+        self.out_gate = spectral_norm(nn.Conv2d(input_size, out_channels, 3, padding=1))
 
     def forward(self, x, h0):
         stacked = torch.cat([x, h0], dim=1)
