@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 from torch.nn.utils.parametrizations import spectral_norm
 
@@ -9,20 +10,23 @@ class LatentConditioningStack(nn.Module):
     """
     Latent Conditioning Stack implementation from https://arxiv.org/abs/2104.00954
 
+    Args:
+        batch_size: `int`
+
     Shape:
-        - Input: (N, 8, 8, 8)
+        - Input: N
         - Output: (N, 768, 8, 8)
 
     Examples:
 
-    >>> input = torch.zeros((5, 8, 8, 8))
-    >>> output = LatentConditioningStack()(input)
+    >>> output = LatentConditioningStack()()
     >>> output.shape
     torch.Size([5, 768, 8, 8])
     """
 
-    def __init__(self):
+    def __init__(self, batch_size):
         super().__init__()
+        self.batch_size = batch_size
         self.conv3 = spectral_norm(nn.Conv2d(8, 8, 3, padding=1, stride=1))
         self.l1 = LBlock(8, 24)
         self.l2 = LBlock(24, 48)
@@ -30,7 +34,8 @@ class LatentConditioningStack(nn.Module):
         self.att = SpatialAttention(192, 192)
         self.l4 = LBlock(192, 768)
 
-    def forward(self, x):
+    def forward(self):
+        x = torch.randn(self.batch_size, 8, 8, 8)
         x = self.conv3(x)
         x = self.l1(x)
         x = self.l2(x)
