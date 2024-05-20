@@ -5,7 +5,7 @@ from torch.nn.utils.parametrizations import spectral_norm
 
 class ConvGRU(nn.Module):
     """
-    convGRU implementation from https://arxiv.org/abs/2104.00954
+    ConvGRU implementation from https://arxiv.org/abs/2104.00954
 
     Args:
         `in_channels`: `int`
@@ -19,11 +19,11 @@ class ConvGRU(nn.Module):
 
     Examples:
 
-    >>> input = torch.zeros((5, 48, 8, 8))
-    >>> hidden = torch.zeros((5, 96, 8, 8))
-    >>> output = ConvGRU(48, 96)(input, hidden)
-    >>> output.shape
-    torch.Size([5, 96, 8, 8])
+    >>> input = torch.zeros((5, 768, 8, 8))
+    >>> h0 = torch.zeros((5, 384, 8, 8))
+    >>> h = ConvGRU(768, 384)(input, h0)
+    >>> h.shape
+    torch.Size([5, 384, 8, 8])
     """
 
     def __init__(self, in_channels, hidden_channels):
@@ -38,12 +38,12 @@ class ConvGRU(nn.Module):
         )
         self.out_gate = spectral_norm(nn.Conv2d(input_size, output_size, 3, padding=1))
 
-    def forward(self, x, prev_state):
-        stacked = torch.cat((x, prev_state), dim=1)
+    def forward(self, x, h0):
+        stacked = torch.cat([x, h0], dim=1)
 
         update = torch.sigmoid(self.update_gate(stacked))
-        reset = torch.sigmoid(self.update_gate(stacked))
-        out = torch.tanh(self.out_gate(torch.cat((x, prev_state * reset), dim=1)))
+        reset = torch.sigmoid(self.reset_gate(stacked))
 
-        new_state = prev_state * (1 - update) + out * update
-        return new_state
+        out = torch.tanh(self.out_gate(torch.cat([x, h0*reset], dim=1))) 
+        h = h0 * (1-update) + out * update 
+        return h
