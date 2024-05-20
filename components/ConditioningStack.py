@@ -15,7 +15,7 @@ class ConditioningStack(nn.Module):
 
     Shape:
         - Input: (N, 4, 1, 256, 256)
-        - Output: [(N, 46, 64, 64), [N, 96, 32, 32], [N, 192, 16, 16], [N, 384, 8, 8]]
+        - Output: [(N, 48, 64, 64), [N, 96, 32, 32], [N, 192, 16, 16], [N, 384, 8, 8]]
 
     Example:
     >>> input = torch.zeros((5, 4, 1, 256, 256))
