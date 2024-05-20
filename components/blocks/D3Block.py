@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 from torch.nn.utils.parametrizations import spectral_norm
 
