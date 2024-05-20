@@ -11,7 +11,7 @@ class LatentConditioningStack(nn.Module):
     Latent Conditioning Stack implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        batch_size: `int`
+        `batch_size`: `int`
 
     Shape:
         - Input: N
