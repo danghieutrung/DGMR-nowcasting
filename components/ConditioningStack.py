@@ -68,4 +68,4 @@ class ConditioningStack(nn.Module):
         for i, obs, conv_relu in zip(range(4), out, self.conv_relu):
             out[i] = conv_relu(obs)
 
-        return out
+        return out[::-1]
