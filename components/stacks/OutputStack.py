@@ -32,7 +32,12 @@ class OutputStack(nn.Module):
         super().__init__()
         self.return_hidden = return_hidden
         self.convGRUs = nn.ModuleList(
-            [ConvGRU(768, 384, 384), ConvGRU(384, 192, 192), ConvGRU(192, 96, 96), ConvGRU(96, 48, 48)]
+            [
+                ConvGRU(768, 384, 384),
+                ConvGRU(384, 192, 192),
+                ConvGRU(192, 96, 96),
+                ConvGRU(96, 48, 48),
+            ]
         )
         self.conv1s = nn.ModuleList(
             [
@@ -89,4 +94,3 @@ class OutputStack(nn.Module):
         if not self.return_hidden:
             return x
         return (x, h)
-

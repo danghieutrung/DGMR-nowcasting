@@ -1,10 +1,13 @@
+# import sys
+# sys.path.append('components/stacks')
+
 import random
 import torch
 import torch.nn as nn
 from torch.nn.utils.parametrizations import spectral_norm
 
-from blocks.DBlock import DBlock
-from blocks.S2D import S2D
+from stacks.blocks.DBlock import DBlock
+from stacks.blocks.S2D import S2D
 
 
 class SpatialDiscriminator(nn.Module):
@@ -62,4 +65,3 @@ class SpatialDiscriminator(nn.Module):
             x = x.permute(1, 0)
             out = torch.cat((out, x))
         return out
-print(SpatialDiscriminator()(torch.zeros((5, 22, 1, 256, 256))).shape)

@@ -1,13 +1,12 @@
 import sys
 
-sys.path.append("components")
-# sys.path.append('components/blocks')
+sys.path.append("components/stacks")
 
 import torch
 import torch.nn as nn
 
-from components.ConditioningStack import ConditioningStack
-from components.OutputStack import OutputStack
+from stacks.ConditioningStack import ConditioningStack
+from stacks.OutputStack import OutputStack
 
 
 class Sampler(nn.Module):
@@ -56,3 +55,6 @@ class Generator(nn.Module):
         h = self.cond_stack(x)
         out = self.sampler(h)
         return out
+
+
+print(Generator(8)(torch.zeros((2, 4, 1, 256, 256))).shape)
