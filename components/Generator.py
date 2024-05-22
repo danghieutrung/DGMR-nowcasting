@@ -31,8 +31,8 @@ class Generator(nn.Module):
     Generator implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `forecast_steps`: `int`
-            number of forecast steps. Default: 18
+        `forecast_steps`:`int`
+            number of forecast steps. Default:18
 
     Shape:
         - Input: (N, T, 1, W, H)

@@ -15,7 +15,7 @@ class SpatialDiscriminator(nn.Module):
     Spatial Discriminator implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `n_frames`: `int`
+        `n_frames`:`int`
             number of randomly picked frames. Default: 8
 
     Shape:

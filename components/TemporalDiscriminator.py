@@ -12,14 +12,14 @@ class TemporalDiscriminator(nn.Module):
     """
     Temporal Discriminator implementation from https://arxiv.org/abs/2104.00954
 
-    Currently only supports `temporal_first` = `True`
+    Currently only supports `temporal_first`=`True`
 
     Args:
-        `crop_size`: `int`
+        `crop_size`:`int`
             2D crop to be randomly applied to the input. Default: 128
-        `temporal_first`: `bool`
+        `temporal_first`:`bool`
             if `True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
-            Default: `True`
+            Default:`True`
 
     Shape:
         - Input: (N, T, C, H, W)

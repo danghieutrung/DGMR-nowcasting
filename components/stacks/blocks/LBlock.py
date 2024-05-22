@@ -7,9 +7,9 @@ class LBlock(nn.Module):
     LBlock implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `in_channels`: `int`
+        `in_channels`:`int`
             number of input channels
-        `out_channels`: `int`
+        `out_channels`:`int`
             number of output channels
 
     Shape:

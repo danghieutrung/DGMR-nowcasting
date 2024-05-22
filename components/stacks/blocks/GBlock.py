@@ -6,12 +6,12 @@ class GBlock(nn.Module):
     GBlock implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `in_channels`: `int`
+        `in_channels`:`int`
             number of input channels
-        `out_channels`: `int`
+        `out_channels`:`int`
             number of output channels
-        `upsampling`: `bool`
-            apply a ReLU up-sampling step by a nn.Upsample(2, 2). Default: `True`
+        `upsampling`:`bool`
+            apply a ReLU up-sampling step by a nn.Upsample(2, 2). Default:`True`
 
     Shape:
         - Input: (N, C_in, W_in, H_in)

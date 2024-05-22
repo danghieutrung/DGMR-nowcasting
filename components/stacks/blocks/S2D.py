@@ -13,7 +13,7 @@ class S2D(nn.Module):
     S2D block implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `scale_factor`: `int`
+        `scale_factor`:`int`
             multiplier for spatial size. Default: 0.5
 
     Shape:

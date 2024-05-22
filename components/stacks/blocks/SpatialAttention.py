@@ -8,13 +8,13 @@ class SpatialAttention(nn.Module):
     Borrowed from hyungting/DGMR-pytorch: https://github.com/hyungting/DGMR-pytorch/blob/master/DGMR/dgmr_layers/LatentStack.py
 
     Args:
-        `in_channels`: `int`
+        `in_channels`:`int`
             number of input channels
-        `out_channels`: `int`
+        `out_channels`:`int`
             number of output channels
-        `ratio_kq`: `int`
+        `ratio_kq`:`int`
             Default: 8
-        `ratio_v`: `int`
+        `ratio_v`:`int`
             Default: 8
 
     Shape:

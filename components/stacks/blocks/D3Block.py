@@ -7,15 +7,15 @@ class D3Block(nn.Module):
     D3Block implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `in_channels`: `int`
+        `in_channels`:`int`
             number of input channels
-        `out_channels`: `int`
+        `out_channels`:`int`
             number of output channels
-        `temporal_first`: `bool`
-            if `True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
-            Default: `True`
-        `relu_first`: `bool`
-            apply a ReLU activation before the first 3x3 Conv layer. Default: `True`
+        `temporal_first`:`bool`
+            if`True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
+            Default:`True`
+        `relu_first`:`bool`
+            apply a ReLU activation before the first 3x3 Conv layer. Default:`True`
 
     Shape:
         - Input: (N, T, C_in, W, H) or (N, C_in, T, W, H)

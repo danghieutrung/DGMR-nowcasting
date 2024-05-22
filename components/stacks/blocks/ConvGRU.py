@@ -8,11 +8,11 @@ class ConvGRU(nn.Module):
     ConvGRU implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `in_channels`: `int`
+        `in_channels`:`int`
             number of input channels
-        `hidden_channels`: `int`
+        `hidden_channels`:`int`
             number of hidden channels
-        `out_channels`: `int`
+        `out_channels`:`int`
             number of output channels. Default:`out_channels`=`hidden_channels`
 
     Shape:

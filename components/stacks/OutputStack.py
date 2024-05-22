@@ -13,8 +13,8 @@ class OutputStack(nn.Module):
     OutputStack for Sampler implementation from https://arxiv.org/abs/2104.00954
 
     Args:
-        `return_hidden`: bool
-            if True, return hidden state. Default: `True`
+        `return_hidden`:`bool`
+            if True, return hidden state. Default:`True`
 
     Shape:
         - Input: [(N, 384, 8, 8), (N, 192, 16, 16), (N, 96, 32, 32), (N, 48, 64, 64)]
