@@ -55,6 +55,3 @@ class Generator(nn.Module):
         h = self.cond_stack(x)
         out = self.sampler(h)
         return out
-
-
-print(Generator(8)(torch.zeros((2, 4, 1, 256, 256))).shape)
