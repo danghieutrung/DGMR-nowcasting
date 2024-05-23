@@ -19,7 +19,7 @@ class LatentConditioningStack(nn.Module):
 
     Examples:
 
-    >>> output = LatentConditioningStack()()
+    >>> output = LatentConditioningStack(5)()
     >>> output.shape
     torch.Size([5, 768, 8, 8])
     """
