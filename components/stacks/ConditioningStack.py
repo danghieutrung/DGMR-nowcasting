@@ -28,7 +28,12 @@ class ConditioningStack(nn.Module):
         super().__init__()
         self.s2d = S2D(0.5)
         self.dblocks = nn.ModuleList(
-            [DBlock(4, 24), DBlock(24, 48), DBlock(48, 96), DBlock(96, 192)]
+            [
+                nn.ModuleList(
+                    [DBlock(4, 24), DBlock(24, 48), DBlock(48, 96), DBlock(96, 192)]
+                )
+                for _ in range(4)
+            ]
         )
         self.conv_relu = nn.ModuleList(
             [
@@ -54,11 +59,11 @@ class ConditioningStack(nn.Module):
         _, T, _, _, _ = x.shape
 
         out = [[], [], [], []]
-        for i in range(T):
+        for i, seperate_dblocks in enumerate(self.dblocks):
             obs = x[:, i, :, :, :].squeeze()
-            for i, dblock in enumerate(self.dblocks):
+            for j, dblock in enumerate(seperate_dblocks):
                 obs = dblock(obs)
-                out[i].append(obs)
+                out[j].append(obs)
 
         out = [torch.cat(o, dim=1) for o in out]
         for i, obs, conv_relu in zip(range(4), out, self.conv_relu):
