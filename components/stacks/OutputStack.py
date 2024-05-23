@@ -18,7 +18,7 @@ class OutputStack(nn.Module):
 
     Shape:
         - Input: [(N, 384, 8, 8), (N, 192, 16, 16), (N, 96, 32, 32), (N, 48, 64, 64)]
-        - Output: [(N, 96, 64, 64), [(N, 768, 8, 8), (N, 384, 16, 16), (N, 192, 32, 32), (N, 96, 64, 64)] or (N, 96, 64, 64) (if `return_hidden`=`False`)
+        - Output: [(N, 96, 64, 64), [(N, 768, 8, 8), (N, 384, 16, 16), (N, 192, 32, 32), (N, 1, 256, 256)] or (N, 1, 256, 256) (if `return_hidden`=`False`)
 
     Examples:
 
@@ -32,7 +32,7 @@ class OutputStack(nn.Module):
     >>> o, h = OutputStack()(h0)
     >>> o.shape
     torch.Size([5, 1, 256, 256]))
-    >>> [hidden.shape for hidden in h] = hidden_shapes
+    >>> [hidden.shape for hidden in h] == hidden_shapes
     True
     """
 
