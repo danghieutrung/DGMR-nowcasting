@@ -22,10 +22,18 @@ class OutputStack(nn.Module):
 
     Examples:
 
-    >>> h0 = [torch.zeros((5, 768, 8, 8)), torch.zeros((5, 384, 16, 16)), torch.zeros((5, 192, 32, 32)), torch.zeros((5, 96, 64, 64))]
-    >>> output, h = OutputStack()(h0)
-    >>> output.shape
-    torch.Size([5, 1, 256, 256])
+    >>> hidden_shapes = [
+            torch.Size([5, 384, 8, 8]),
+            torch.Size([5, 192, 16, 16]),
+            torch.Size([5, 96, 32, 32]),
+            torch.Size([5, 48, 64, 64]),
+        ]
+    >>> h0 = [torch.zeros(shape) for shape in hidden_shapes]
+    >>> o, h = OutputStack()(h0)
+    >>> o.shape
+    torch.Size([5, 1, 256, 256]))
+    >>> [hidden.shape for hidden in h] = hidden_shapes
+    True
     """
 
     def __init__(self, return_hidden=True):
