@@ -14,7 +14,7 @@ class OutputStack(nn.Module):
 
     Args:
         `return_hidden`:`bool`
-            if True, return hidden state. Default:`True`
+            if`True`, return hidden state. Default:`True`
 
     Shape:
         - Input: [(N, 384, 8, 8), (N, 192, 16, 16), (N, 96, 32, 32), (N, 48, 64, 64)]
