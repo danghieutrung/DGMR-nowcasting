@@ -19,13 +19,13 @@ class GBlock(nn.Module):
 
     Examples:
 
-    >>> input = torch.zeros((5, 4, 8, 8))
-    >>> output = DBlock(4, 48)(input)
+    >>> input = torch.zeros((5, 96, 8, 8))
+    >>> output = GBlock(96, 48)(input)
     >>> output.shape
     torch.Size([5, 48, 16, 16])
 
     >>> input = torch.zeros((5, 4, 8, 8))
-    >>> output = DBlock(4, 48, upsampling=False)(input)
+    >>> output = GBlock(96, 48, upsampling=False)(input)
     >>> output.shape
     torch.Size([5, 48, 8, 8])
     """
