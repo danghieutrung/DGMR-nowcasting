@@ -18,10 +18,10 @@ class LBlock(nn.Module):
 
     Example:
 
-    >>> input = torch.zeros((5, 4, 8, 8))
-    >>> output = DBlock(4, 48)(input)
+    >>> input = torch.zeros((5, 8, 8, 8))
+    >>> output = LBlock(8, 24)(input)
     >>> output.shape
-    torch.Size([5, 48, 8, 8])
+    torch.Size([5, 24, 8, 8])
     """
 
     def __init__(self, in_channels, out_channels):
