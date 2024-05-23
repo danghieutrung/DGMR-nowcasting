@@ -21,7 +21,7 @@ class ConditioningStack(nn.Module):
     >>> input = torch.zeros((5, 4, 1, 256, 256))
     >>> output = ConditioningStack()(input)
     >>> [out.shape for out in output]
-    [torch.Size([5, 48, 64, 64]), torch.Size([5, 96, 32, 32]), torch.Size([5, 192, 16, 16]), torch.Size([5, 384, 8, 8])]
+    [torch.Size([5, 384, 8, 8]), torch.Size([5, 192, 16, 16]), torch.Size([5, 96, 32, 32]), torch.Size([5, 48, 64, 64])]
     """
 
     def __init__(self):
