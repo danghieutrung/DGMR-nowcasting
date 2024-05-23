@@ -31,7 +31,7 @@ class OutputStack(nn.Module):
     >>> h0 = [torch.zeros(shape) for shape in hidden_shapes]
     >>> o, h = OutputStack()(h0)
     >>> o.shape
-    torch.Size([5, 1, 256, 256]))
+    torch.Size([5, 1, 256, 256])
     >>> [hidden.shape for hidden in h] == hidden_shapes
     True
     """
