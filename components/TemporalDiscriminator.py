@@ -18,7 +18,7 @@ class TemporalDiscriminator(nn.Module):
         `crop_size`:`int`
             2D crop to be randomly applied to the input. Default: 128
         `temporal_first`:`bool`
-            if `True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
+            if`True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
             Default:`True`
 
     Shape:
