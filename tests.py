@@ -105,7 +105,7 @@ class TestShapes(unittest.TestCase):
     def test_Generator(self):
         i = torch.zeros((2, 4, 1, 256, 256))
         o = Generator(18)(i)
-        self.assertEqual(o.shape, torch.Size([2, 18, 256, 256]))
+        self.assertEqual(o.shape, torch.Size([2, 18, 1, 256, 256]))
 
     def test_SpatialDiscriminator(self):
         i = torch.zeros((5, 22, 1, 256, 256))
