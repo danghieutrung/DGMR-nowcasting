@@ -4,6 +4,7 @@
 import random
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.nn.utils.parametrizations import spectral_norm
 
 from stacks.blocks.DBlock import DBlock
@@ -20,14 +21,14 @@ class SpatialDiscriminator(nn.Module):
 
     Shape:
         - Input: (N, T, C, H, W)
-        - Output: (N, n_frames)
+        - Output: (N, 1)
 
     Examples:
 
     >>> input = torch.zeros((5, 22, 1, 256, 256))
     >>> output = TemporalDiscriminator()(input)
     >>> output.shape
-    torch.Size([5, 8])
+    torch.Size([5, 1])
     """
 
     def __init__(self, n_frame=8):
@@ -64,4 +65,7 @@ class SpatialDiscriminator(nn.Module):
             x = self.relu(x)
             x = x.permute(1, 0)
             out = torch.cat((out, x))
+        
+        out = torch.sum(out, dim=1)[:, None]
+        out = F.relu(out)
         return out
