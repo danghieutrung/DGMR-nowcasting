@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 
 
 class GBlock(nn.Module):
@@ -38,7 +39,6 @@ class GBlock(nn.Module):
         self.us2 = (
             nn.Upsample(scale_factor=2, mode="nearest") if upsampling else nn.Identity()
         )
-        self.relu = nn.ReLU()
         self.bn = nn.BatchNorm2d(in_channels)
         self.conv1 = nn.Conv2d(in_channels, out_channels, 1, groups=out_channels)
         self.conv3_1 = nn.Conv2d(in_channels, in_channels, 3, 1, 1, groups=out_channels)
@@ -51,11 +51,11 @@ class GBlock(nn.Module):
         x1 = self.conv1(x1)
 
         x2 = self.bn(x)
-        x2 = self.relu(x2)
+        x2 = F.relu(x2)
         x2 = self.us2(x2)
         x2 = self.conv3_1(x2)
         x2 = self.bn(x2)
-        x2 = self.relu(x2)
+        x2 = F.relu(x2)
         x2 = self.conv3_2(x2)
 
         out = x1 + x2

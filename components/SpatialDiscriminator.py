@@ -46,7 +46,6 @@ class SpatialDiscriminator(nn.Module):
         )
         self.bn = nn.BatchNorm1d(768)
         self.linear = spectral_norm(nn.Linear(768, 1))
-        self.relu = nn.ReLU()
 
     def forward(self, batch):
         _, T, _, _, _ = batch.shape
@@ -62,7 +61,7 @@ class SpatialDiscriminator(nn.Module):
             x = torch.sum(x, dim=(-1, -2))
             x = self.bn(x)
             x = self.linear(x)
-            x = self.relu(x)
+            x = F.relu(x)
             x = x.permute(1, 0)
             out = torch.cat((out, x))
         

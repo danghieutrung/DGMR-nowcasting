@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.nn.utils.parametrizations import spectral_norm
 
 
@@ -36,8 +37,8 @@ class D3Block(nn.Module):
     def __init__(self, in_channels, out_channels, temporal_first=True, relu_first=True):
         super().__init__()
         self.temporal_first = temporal_first
-        self.relu3_1 = nn.ReLU() if relu_first else nn.Identity()
-        self.relu3_2 = nn.ReLU()
+        self.relu3_1 = F.relu if relu_first else nn.Identity()
+        self.relu3_2 = F.relu
         self.conv1 = nn.Conv3d(in_channels, out_channels, kernel_size=1)
         self.conv3_1 = spectral_norm(
             nn.Conv3d(in_channels, in_channels, kernel_size=3, padding=1, stride=1)

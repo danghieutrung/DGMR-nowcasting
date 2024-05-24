@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.nn.utils.parametrizations import spectral_norm
 
 from stacks.blocks.D3Block import D3Block
@@ -50,7 +51,6 @@ class TemporalDiscriminator(nn.Module):
         )
         self.bn = nn.BatchNorm1d(768)
         self.linear = spectral_norm(nn.Linear(768, 1))
-        self.relu = nn.ReLU()
 
     def forward(self, x):
         if not self.temporal_first:
@@ -66,5 +66,5 @@ class TemporalDiscriminator(nn.Module):
         x = x.reshape(B, T, 768)
         x = self.linear(x)
         x = torch.sum(x, dim=1)
-        x = self.relu(x)
+        x = F.relu(x)
         return x

@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 
 
 class DBlock(nn.Module):
@@ -34,8 +35,8 @@ class DBlock(nn.Module):
 
     def __init__(self, in_channels, out_channels, relu_first=True, downsampling=True):
         super().__init__()
-        self.relu3_1 = nn.ReLU() if relu_first else nn.Identity()
-        self.relu3_2 = nn.ReLU()
+        self.relu3_1 = F.relu if relu_first else nn.Identity()
+        self.relu3_2 = F.relu
         self.conv1 = nn.Conv2d(in_channels, out_channels, 1)
         self.conv3_1 = nn.Conv2d(in_channels, in_channels, 3, stride=1, padding=1)
         self.conv3_2 = nn.Conv2d(in_channels, out_channels, 3, stride=1, padding=1)

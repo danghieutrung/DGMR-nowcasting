@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.nn.modules.pixelshuffle import PixelShuffle
 from torch.nn.utils.parametrizations import spectral_norm
 
@@ -72,7 +73,6 @@ class OutputStack(nn.Module):
             ]
         )
         self.bn = nn.BatchNorm2d(48)
-        self.relu = nn.ReLU()
         self.conv1_5 = spectral_norm(nn.Conv2d(48, 4, 1))
         self.d2s = PixelShuffle(upscale_factor=2)
 
@@ -95,7 +95,7 @@ class OutputStack(nn.Module):
             x = G_up(x)
 
         x = self.bn(x)
-        x = self.relu(x)
+        x = F.relu(x)
         x = self.conv1_5(x)
         x = self.d2s(x)
 
