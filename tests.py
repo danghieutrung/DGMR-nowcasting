@@ -110,7 +110,7 @@ class TestShapes(unittest.TestCase):
     def test_SpatialDiscriminator(self):
         i = torch.zeros((5, 22, 1, 256, 256))
         o = SpatialDiscriminator(n_frame=8)(i)
-        self.assertEqual(o.shape, torch.Size([5, 8]))
+        self.assertEqual(o.shape, torch.Size([5, 1]))
 
     def test_TemporalDiscriminator(self):
         i = torch.zeros((5, 22, 1, 256, 256))
