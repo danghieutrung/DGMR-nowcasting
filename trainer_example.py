@@ -57,7 +57,7 @@ def train_one_epoch(epoch_index, tb_writer):
         optimizer.zero_grad()
         _, _, S_pred, _, S_obs = model(X_train, y_train)
         s_loss = S_loss(S_pred, S_obs)
-        print("SS", t_loss)
+        print("SS", s_loss)
         s_loss.backward()
         optimizer.step()
 
