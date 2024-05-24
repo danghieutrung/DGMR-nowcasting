@@ -63,8 +63,8 @@ def G_loss(pred, obs, temp_pred, spa_pred, l=20, N=N, H=H, W=W):
 
 
 def T_loss(temp_pred, temp_obs):
-    return (F.ReLU(1 - temp_obs) + F.ReLU(1 + temp_pred)).mean()
+    return (F.relu(1 - temp_obs) + F.relu(1 + temp_pred)).mean()
 
 
 def S_loss(spa_pred, spa_obs):
-    return (F.ReLU(1 - spa_obs) + F.ReLU(1 + spa_pred)).mean()
+    return (F.relu(1 - spa_obs) + F.relu(1 + spa_pred)).mean()
