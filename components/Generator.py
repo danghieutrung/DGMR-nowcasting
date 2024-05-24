@@ -36,14 +36,14 @@ class Generator(nn.Module):
 
     Shape:
         - Input: (N, T, 1, W, H)
-        - Output: (N, `forecast_steps`, W, H)
+        - Output: (N, `forecast_steps`, 1, W, H)
 
     Examples:
 
     >>> input = torch.zeros((5, 4, 1, 256, 256))
     >>> output = Generator(18)(input)
     >>> output.shape
-    torch.Size([5, 18, 256, 256])
+    torch.Size([5, 18, 1, 256, 256])
     """
 
     def __init__(self, forecast_steps=18):
@@ -54,4 +54,5 @@ class Generator(nn.Module):
     def forward(self, x):
         h = self.cond_stack(x)
         out = self.sampler(h)
+        out = out[:, :, None, :, :]
         return out
