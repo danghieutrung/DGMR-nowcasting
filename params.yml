@@ -1,8 +1,3 @@
-foo: bar
-pleh: help
-stuff:
-  foo: bar
-  bar: foo
 models:
   generator:
     forecast_steps: 18
