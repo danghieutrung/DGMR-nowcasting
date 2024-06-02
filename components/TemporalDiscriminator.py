@@ -13,14 +13,9 @@ class TemporalDiscriminator(nn.Module):
     """
     Temporal Discriminator implementation from https://arxiv.org/abs/2104.00954
 
-    Currently only supports `temporal_first`=`True`
-
     Args:
         `crop_size`:`int`
             2D crop to be randomly applied to the input. Default: 128
-        `temporal_first`:`bool`
-            if`True`, the temporal dimension is before the channel dimension (N, T, C, H, W).
-            Default:`True`
 
     Shape:
         - Input: (N, T, C, H, W)
@@ -34,14 +29,13 @@ class TemporalDiscriminator(nn.Module):
     torch.Size([5, 1])
     """
 
-    def __init__(self, crop_size=128, temporal_first=True):
+    def __init__(self, crop_size=128):
         super().__init__()
         self.crop_size = crop_size
-        self.temporal_first = temporal_first
         self.s2d = S2D(scale_factor=0.5)
         self.d3blocks = nn.Sequential(
-            D3Block(4, 48, temporal_first=temporal_first, relu_first=False),
-            D3Block(48, 96, temporal_first=temporal_first),
+            D3Block(4, 48, relu_first=False),
+            D3Block(48, 96),
         )
         self.dblocks = nn.Sequential(
             DBlock(96, 192),
@@ -53,8 +47,6 @@ class TemporalDiscriminator(nn.Module):
         self.linear = spectral_norm(nn.Linear(768, 1))
 
     def forward(self, x):
-        if not self.temporal_first:
-            raise RuntimeError(f"Currently only supports temporal_first=True")
         x = random_crop(x, self.crop_size)
         x = self.s2d(x)
         x = self.d3blocks(x)
