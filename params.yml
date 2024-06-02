@@ -1,0 +1,30 @@
+foo: bar
+pleh: help
+stuff:
+  foo: bar
+  bar: foo
+models:
+  generator:
+    forecast_steps: 18
+  spatial_discriminator:
+    n_frame: 8
+  temporal_discriminator:
+    crop_size: 128
+optim:
+  generator:
+    lr: 0.00005
+    b1: 0
+    b2: 0.999
+  spatial_discriminator:
+    lr: 0.0002
+    b1: 0
+    b2: 0.999
+  temporal_discriminator:
+    lr: 0.0002
+    b1: 0
+    b2: 0.999
+  params:
+    epochs: 20
+    batch_size: 16
+    train_shuffle: True
+
