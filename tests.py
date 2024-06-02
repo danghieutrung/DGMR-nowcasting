@@ -1,9 +1,3 @@
-import sys
-
-sys.path.append("components")
-sys.path.append("components/stacks")
-
-
 import torch
 import unittest
 

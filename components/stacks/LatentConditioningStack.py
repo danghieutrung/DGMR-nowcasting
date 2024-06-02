@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.parametrizations import spectral_norm
 
-from blocks.LBlock import LBlock
-from blocks.SpatialAttention import SpatialAttention
+from components.stacks.blocks.LBlock import LBlock
+from components.stacks.blocks.SpatialAttention import SpatialAttention
 
 
 class LatentConditioningStack(nn.Module):

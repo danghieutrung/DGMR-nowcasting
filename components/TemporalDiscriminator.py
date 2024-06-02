@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.parametrizations import spectral_norm
 
-from stacks.blocks.D3Block import D3Block
-from stacks.blocks.DBlock import DBlock
-from stacks.blocks.S2D import S2D
-from stacks.blocks.utils import *
+from components.stacks.blocks.D3Block import D3Block
+from components.stacks.blocks.DBlock import DBlock
+from components.stacks.blocks.S2D import S2D
+from components.stacks.blocks.utils import *
 
 
 class TemporalDiscriminator(nn.Module):

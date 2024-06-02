@@ -1,14 +1,11 @@
-# import sys
-# sys.path.append('components/stacks')
-
 import random
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.parametrizations import spectral_norm
 
-from stacks.blocks.DBlock import DBlock
-from stacks.blocks.S2D import S2D
+from components.stacks.blocks.DBlock import DBlock
+from components.stacks.blocks.S2D import S2D
 
 
 class SpatialDiscriminator(nn.Module):

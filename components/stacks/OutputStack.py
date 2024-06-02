@@ -3,10 +3,10 @@ import torch.nn.functional as F
 from torch.nn.modules.pixelshuffle import PixelShuffle
 from torch.nn.utils.parametrizations import spectral_norm
 
-from LatentConditioningStack import LatentConditioningStack
+from components.stacks.LatentConditioningStack import LatentConditioningStack
 
-from blocks.ConvGRU import ConvGRU
-from blocks.GBlock import GBlock
+from components.stacks.blocks.ConvGRU import ConvGRU
+from components.stacks.blocks.GBlock import GBlock
 
 
 class OutputStack(nn.Module):

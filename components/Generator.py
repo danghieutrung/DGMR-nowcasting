@@ -1,12 +1,8 @@
-import sys
-
-sys.path.append("components/stacks")
-
 import torch
 import torch.nn as nn
 
-from stacks.ConditioningStack import ConditioningStack
-from stacks.OutputStack import OutputStack
+from components.stacks.ConditioningStack import ConditioningStack
+from components.stacks.OutputStack import OutputStack
 
 
 class Sampler(nn.Module):

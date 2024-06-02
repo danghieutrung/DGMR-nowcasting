@@ -1,8 +1,3 @@
-import sys
-
-sys.path.append("components")
-
-
 import torch.nn.functional as F
 
 from components.Generator import Generator
